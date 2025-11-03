@@ -19,12 +19,12 @@ export default function Portfolio() {
   const projects = [
     {
       id: "p1",
-      title: "Airline Passenger Satisfaction",
+      title: "Airline Passenger Pulse",
       blurb:
         "Model dissatisfaction as “at-risk” customers; build end-to-end pipeline (EDA → features → LightGBM/XGBoost → AUC/PR) with SHAP, counterfactuals, and a mini dashboard of “preventive actions” by segment.",
       tags: ["Tabular ML", "Class Imbalance", "Explainability", "Streamlit/FastAPI"],
-      status: "Coming soon",
-      link: "#",
+      status: "Explore on GitHub",
+      link: "https://github.com/smakde/Airline-Passenger-Pulse",
       img: "/images/Airlines.png?q=80&w=1200&auto=format&fit=crop",
     },
     {
@@ -71,14 +71,14 @@ export default function Portfolio() {
             <span className="font-semibold tracking-tight">Shreyas Makde</span>
           </div>
           <nav className="hidden md:flex items-center gap-6 text-sm">
-            <a href="#work" className="hover:text-emerald-300 transition">Work</a>
-            {/* <a href="#skills" className="hover:text-emerald-300 transition">Skills</a> */}
-            <a href="#about" className="hover:text-emerald-300 transition">About</a>
-            <a href="#contact" className="hover:text-emerald-300 transition">Contact</a>
+            <a target="_blank" href="#work" className="hover:text-emerald-300 transition">Work</a>
+            {/* <a target="_blank" href="#skills" className="hover:text-emerald-300 transition">Skills</a> */}
+            <a target="_blank" href="#about" className="hover:text-emerald-300 transition">About</a>
+            <a target="_blank" href="#contact" className="hover:text-emerald-300 transition">Contact</a>
           </nav>
           <div className="flex items-center gap-2">
             <Button variant="secondary" className="bg-white/10 hover:bg-white/20 border-white/10" asChild>
-              <a href="mailto:shreyas.makde.dev@gmail.com"><Mail className="mr-2 h-4 w-4"/>Get in touch</a>
+              <a target="_blank" href="mailto:shreyas.makde.dev@gmail.com"><Mail className="mr-2 h-4 w-4"/>Get in touch</a>
             </Button>
           </div>
         </div>
@@ -109,27 +109,27 @@ export default function Portfolio() {
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <Button className="bg-emerald-500 hover:bg-emerald-400" asChild>
-                <a href="https://github.com/smakde"><Brain className="mr-2 h-4 w-4"/>See my work</a>
+              <Button className="bg-white/10 hover:bg-white/20 border-white/10" asChild>
+                <a target="_blank" href="https://github.com/smakde"><Brain className="mr-2 h-4 w-4"/>See my work</a>
               </Button>
               {/* <Button variant="secondary" className="bg-white/10 hover:bg-white/20 border-white/10" asChild>
-                <a href="#skills"><Boxes className="mr-2 h-4 w-4"/>Skills</a>
+                <a target="_blank" href="#skills"><Boxes className="mr-2 h-4 w-4"/>Skills</a>
               </Button> */}
               <Button variant="secondary" className="bg-white/10 hover:bg-white/20 border-white/10" asChild>
-                <a href="/Shreyas_Makde_Resume.pdf" download><FileDown className="mr-2 h-4 w-4"/>Resume</a>
+                <a target="_blank" href="/Shreyas_Makde_Resume.pdf" download><FileDown className="mr-2 h-4 w-4"/>Resume</a>
               </Button>
             </div>
 
             <div className="mt-6 flex items-center gap-4">
-              <a href="https://github.com/smakde" className="inline-flex items-center gap-2 hover:text-emerald-300" aria-label="GitHub">
+              <a target="_blank" href="https://github.com/smakde" className="inline-flex items-center gap-2 hover:text-emerald-300" aria-label="GitHub">
                 <Github className="h-5 w-5"/>
                 <span className="text-sm">GitHub</span>
               </a>
-              <a href="https://www.linkedin.com/in/shrey1" className="inline-flex items-center gap-2 hover:text-emerald-300" aria-label="LinkedIn">
+              <a target="_blank" href="https://www.linkedin.com/in/shrey1" className="inline-flex items-center gap-2 hover:text-emerald-300" aria-label="LinkedIn">
                 <SiLinkedin className="h-5 w-5"/>
                 <span className="text-sm">LinkedIn</span>
               </a>
-              <a href="mailto:shreyas.makde.dev@gmail.com" className="inline-flex items-center gap-2 hover:text-emerald-300" aria-label="LinkedIn">
+              <a target="_blank" href="mailto:shreyas.makde.dev@gmail.com" className="inline-flex items-center gap-2 hover:text-emerald-300" aria-label="LinkedIn">
                 <Mail className="h-4 w-4"/>
                 <span className="text-sm">shreyas.makde.dev@gmail.com</span>
               </a>
@@ -178,7 +178,7 @@ TailwindCSS" />
           <div>
             <h2 className="text-2xl md:text-3xl font-semibold">Projects</h2>
           </div>
-          {/* <a href="#contact" className="text-sm text-emerald-300 hover:underline">Want one tailored to your stack?</a> */}
+          {/* <a target="_blank" href="#contact" className="text-sm text-emerald-300 hover:underline">Want one tailored to your stack?</a> */}
         </div>
 
         <div className="grid sm:grid-cols-2 gap-6">
@@ -190,7 +190,7 @@ TailwindCSS" />
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
                   <span>{p.title}</span>
-                  <Badge className="bg-amber-500/20 text-amber-200 border-amber-400/30">{p.status}</Badge>
+                  <Badge className="bg-green-500/20 text-white-200 border-green-400/30">{p.status}</Badge>
                 </CardTitle>
                 <CardDescription className="text-slate-300/80">
                   {p.blurb}
@@ -206,7 +206,7 @@ TailwindCSS" />
               <CardFooter className="justify-between">
                 <div className="text-xs text-slate-400">Click on details for GitHub resources for this project</div>
                 <Button variant="secondary" className="bg-white/10 hover:bg-white/20 border-white/10" asChild>
-                  <a href={p.link} aria-disabled>
+                  <a target="_blank" href={p.link} aria-disabled>
                     <ExternalLink className="mr-2 h-4 w-4"/>Details
                   </a>
                 </Button>
@@ -288,9 +288,9 @@ reliability. Experienced in cross-functional collaboration, delivering quality s
         <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-400">
           <div>© {year} Shreyas Makde: All rights reserved.</div>
           <div className="flex items-center gap-5">
-            <a href="mailto:shreyas.makde.dev@gmail.com" className="hover:text-emerald-300 inline-flex items-center gap-1"><Mail className="h-4 w-4"/>shreyas.makde.dev@gmail.com</a>
-            <a href="https://github.com/smakde" className="hover:text-emerald-300 inline-flex items-center gap-1"><Github className="h-4 w-4"/>GitHub</a>
-            <a href="https://www.linkedin.com/in/shrey1" className="hover:text-emerald-300 inline-flex items-center gap-1"><SiLinkedin className="h-4 w-4"/>LinkedIn</a>
+            <a target="_blank" href="mailto:shreyas.makde.dev@gmail.com" className="hover:text-emerald-300 inline-flex items-center gap-1"><Mail className="h-4 w-4"/>shreyas.makde.dev@gmail.com</a>
+            <a target="_blank" href="https://github.com/smakde" className="hover:text-emerald-300 inline-flex items-center gap-1"><Github className="h-4 w-4"/>GitHub</a>
+            <a target="_blank" href="https://www.linkedin.com/in/shrey1" className="hover:text-emerald-300 inline-flex items-center gap-1"><SiLinkedin className="h-4 w-4"/>LinkedIn</a>
           </div>
         </div>
       </footer>

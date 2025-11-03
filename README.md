@@ -1,73 +1,82 @@
-# React + TypeScript + Vite
+# Shreyas Makde — AI/ML Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, single-page portfolio designed for senior software and machine learning engineers. The site showcases projects, technical focus areas, and contact information with a polished, animated presentation.
 
-Currently, two official plugins are available:
+https://github.com/smakde
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Highlights
+- **Hero spotlight** with avatar fallback, personal tagline, and quick access to resume and social links.
+- **Projects gallery** prepared for four flagship case studies, each with technology badges and call-to-action buttons.
+- **Skills overview** that surfaces cloud, MLOps, and engineering strengths through animated stat cards.
+- **About section** outlining recent achievements and technical leadership experience.
+- **Responsive, accessible layout** with motion-enhanced transitions, keyboard-friendly navigation, and semantic markup.
 
-## React Compiler
+## 🛠 Tech Stack
+- [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vite.dev/) for lightning-fast local development and builds
+- [Tailwind CSS](https://tailwindcss.com/) with utility-based design tokens
+- [shadcn/ui](https://ui.shadcn.com/) component primitives (Button, Card, Badge)
+- [framer-motion](https://www.framer.com/motion/) for subtle animations
+- [lucide-react](https://lucide.dev/) and [react-icons](https://react-icons.github.io/react-icons/) iconography
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Getting Started
+1. **Install dependencies**
+   ```bash
+   npm install
+   ```
+2. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+   Vite will print a local URL (typically `http://localhost:5173`) with hot module reloading enabled.
+3. **Create a production build**
+   ```bash
+   npm run build
+   ```
+4. **Preview the production bundle locally**
+   ```bash
+   npm run preview
+   ```
 
-## Expanding the ESLint configuration
+> **Node version**: Vite 7 works best on Node.js 18 or later. Use `nvm use 18` (or higher) before installing.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📁 Repository Structure
+```
+├── public/                  # Static assets (resume PDF, project images, favicon, etc.)
+├── src/
+│   ├── components/ui/       # Reusable UI components (button, badge, card, portfolio page)
+│   ├── lib/                 # Utility helpers
+│   ├── assets/              # Local images/SVGs imported into React
+│   ├── App.tsx              # Entry point that renders the portfolio
+│   └── main.tsx             # React/Vite bootstrap
+├── index.html               # Root HTML template used by Vite
+├── tailwind.config.js       # Tailwind design tokens & content sources
+├── tsconfig*.json           # TypeScript project configs
+└── vite.config.ts           # Vite bundler configuration
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🧩 Customization Guide
+- **Update personal details**: adjust names, taglines, and contact links inside `src/components/ui/Portfolio.tsx`.
+- **Swap project tiles**: edit the `projects` array in the same file; supply new titles, descriptions, badges, and URLs.
+- **Replace imagery**: store hero/project images in `public/images/` and point the component props to the new paths.
+- **Toggle sections**: the skills and contact sections are scaffolded but commented out—uncomment them to enable forms or additional content.
+- **Theming**: tweak Tailwind colors or add new utility classes in `tailwind.config.js` for a personalized visual identity.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📦 NPM Scripts
+| Command        | Purpose                                      |
+| -------------- | -------------------------------------------- |
+| `npm run dev`  | Launch Vite dev server with HMR              |
+| `npm run build`| Type-check and generate an optimized build   |
+| `npm run preview` | Serve the production build locally       |
+| `npm run lint` | Run ESLint across the project                |
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## ☁️ Deployment Tips
+- **Static hosting**: Deploy the `dist/` output to Netlify, Vercel, GitHub Pages, or any static host.
+- **Custom domains**: Configure DNS to point to your hosting provider and add redirects as needed.
+- **Continuous deployment**: Pair with GitHub Actions or your preferred CI to lint, test, and build on every push.
+
+## 📄 License
+This project is currently unlicensed. Reach out before reusing or distributing the content.
+
+---
+Crafted with care to highlight AI/ML engineering expertise while remaining easy to extend for future work.

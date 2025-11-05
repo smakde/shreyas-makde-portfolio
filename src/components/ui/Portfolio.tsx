@@ -1,11 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Github, Mail, FileDown, ExternalLink, Brain, Cloud, Boxes, Sparkles, BrickWall, Backpack } from "lucide-react";
+import {
+  Github,
+  Mail,
+  FileDown,
+  ExternalLink,
+  Brain,
+  Cloud,
+  Boxes,
+  Sparkles,
+  BrickWall,
+  Backpack,
+  Menu,
+  X,
+} from "lucide-react";
 import { SiLinkedin } from "react-icons/si";
+import { BsFront } from "react-icons/bs";
 import { Button } from "./button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./card";
 import { Badge } from "./badge";
-import { BsFront } from "react-icons/bs";
+
+// ===
+// Portfolio — single-file React component
+// Tailwind + shadcn/ui + framer-motion + lucide-react
+// Sections: Home, Work Experience, Projects, About
+// ===
 
 export default function Portfolio() {
   const [year] = useState(new Date().getFullYear());
@@ -15,7 +34,7 @@ export default function Portfolio() {
       id: "p1",
       title: "Airline Passenger Pulse",
       blurb:
-        "Model dissatisfaction as “at-risk” customers; build end-to-end pipeline (EDA → features → LightGBM/XGBoost → AUC/PR) with SHAP, counterfactuals, and a mini dashboard of “preventive actions” by segment.",
+        "Model dissatisfaction as “at-risk” customers; end-to-end pipeline (EDA → features → LightGBM/XGBoost → AUC/PR) with SHAP, counterfactuals, and an actions dashboard.",
       tags: ["Tabular ML", "Class Imbalance", "Explainability", "Streamlit/FastAPI"],
       status: "Explore on GitHub",
       link: "https://github.com/smakde/Airline-Passenger-Pulse",
@@ -25,7 +44,7 @@ export default function Portfolio() {
       id: "p2",
       title: "NLP Ticket Triage & Sentiment",
       blurb:
-        "Compact transformer to auto-label help-desk tickets (sentiment + topic), with FastAPI endpoint and eval dashboard.",
+        "Compact transformer to auto-label help-desk tickets (sentiment + topic), with FastAPI inference and eval dashboard.",
       tags: ["Transformers", "Text Classification", "FastAPI", "MLOps"],
       status: "Explore on GitHub",
       link: "https://github.com/smakde/NLP-Ticket-Triage",
@@ -35,7 +54,7 @@ export default function Portfolio() {
       id: "p3",
       title: "Learning-Resource Recommender",
       blurb:
-        "Hybrid implicit-feedback + content (ALS/LightFM) with a tiny Streamlit app to browse top-N recs and explanations.",
+        "Hybrid implicit-feedback + content (ALS/LightFM). Tiny Streamlit to browse top-N recs and explanations.",
       tags: ["Recommenders", "Vectorization", "Eval@K", "Streamlit"],
       status: "Explore on GitHub",
       link: "https://github.com/smakde/Learning-Resource-Recommender",
@@ -55,7 +74,7 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100">
-      {/* Nav */}
+      {/* Header */}
       <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-slate-950/50 border-b border-white/10">
         <div className="mx-auto max-w-7xl px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -65,7 +84,7 @@ export default function Portfolio() {
             <span className="font-semibold tracking-tight">Shreyas Makde</span>
           </div>
 
-          {/* Internal section links: NO target=_blank */}
+          {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-6 text-sm">
             <a href="#home" className="hover:text-emerald-300 transition">Home</a>
             <a href="#work" className="hover:text-emerald-300 transition">Work Experience</a>
@@ -73,11 +92,14 @@ export default function Portfolio() {
             <a href="#about" className="hover:text-emerald-300 transition">About</a>
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-2">
             <Button variant="secondary" className="bg-white/10 hover:bg-white/20 border-white/10" asChild>
-              <a href="mailto:shreyas.makde.dev@gmail.com"><Mail className="mr-2 h-4 w-4"/>Get in touch</a>
+              <a href="mailto:shreyas.makde.dev@gmail.com"><Mail className="mr-2 h-4 w-4" />Get in touch</a>
             </Button>
           </div>
+
+          {/* Mobile */}
+          <MobileNav />
         </div>
       </header>
 
@@ -85,7 +107,6 @@ export default function Portfolio() {
       <section id="home" className="w-full px-6 pt-16 pb-10 scroll-mt-24">
         <div className="grid md:grid-cols-2 gap-10 items-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            {/* Avatar */}
             <div className="mb-6">
               <Avatar
                 src="https://avatars.githubusercontent.com/u/209976736?v=4"
@@ -94,9 +115,11 @@ export default function Portfolio() {
                 initials="SM"
               />
             </div>
+
             <Badge className="mb-4 bg-emerald-500/20 text-emerald-300 border-emerald-400/30">
               Shreyas Bhupesh Makde: Sr. Software Engineer : AI/ML
             </Badge>
+
             <h1 className="text-4xl md:text-5xl font-semibold tracking-tight leading-tight">
               I engineer and envision data to{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-cyan-300 to-blue-300">
@@ -309,12 +332,105 @@ export default function Portfolio() {
   );
 }
 
-/* ——— Helpers ——— */
-function Avatar({ src, alt, className, initials = "SM" }: { src?: string; alt?: string; className?: string; initials?: string }) {
+/* ——— Mobile hamburger menu ——— */
+function MobileNav() {
+  const [open, setOpen] = useState(false);
+
+  // lock body scroll when menu is open
+  useEffect(() => {
+    const original = document.body.style.overflow;
+    document.body.style.overflow = open ? "hidden" : original || "";
+    return () => {
+      document.body.style.overflow = original;
+    };
+  }, [open]);
+
+  // close on hash change or ESC
+  useEffect(() => {
+    const onHash = () => setOpen(false);
+    const onEsc = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("hashchange", onHash);
+    window.addEventListener("keydown", onEsc);
+    return () => {
+      window.removeEventListener("hashchange", onHash);
+      window.removeEventListener("keydown", onEsc);
+    };
+  }, []);
+
+  const link = "block w-full text-left px-4 py-3 rounded-xl hover:bg-white/10 hover:text-emerald-300 transition";
+
+  return (
+    <div className="md:hidden">
+      <button
+        aria-label="Open menu"
+        aria-controls="mobile-menu"
+        aria-expanded={open}
+        onClick={() => setOpen(true)}
+        className="p-2 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10"
+      >
+        <Menu className="h-5 w-5" />
+      </button>
+
+      {/* Overlay */}
+      {open && <div className="fixed inset-0 z-[60] bg-black/50" onClick={() => setOpen(false)} />}
+
+      {/* Drawer */}
+      <aside
+        id="mobile-menu"
+        className={`fixed z-[70] top-0 right-0 h-screen w-80 max-w-[85vw] bg-slate-950/95 border-l border-white/10 backdrop-blur transition-transform duration-200 ${
+          open ? "translate-x-0" : "translate-x-full"
+        }`}
+        role="dialog"
+        aria-modal="true"
+      >
+        <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+          <span className="font-semibold">Menu</span>
+          <button
+            aria-label="Close menu"
+            onClick={() => setOpen(false)}
+            className="p-2 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        <nav className="p-2">
+          <a href="#home" className={link} onClick={() => setOpen(false)}>Home</a>
+          <a href="#work" className={link} onClick={() => setOpen(false)}>Work Experience</a>
+          <a href="#projects" className={link} onClick={() => setOpen(false)}>Projects</a>
+          <a href="#about" className={link} onClick={() => setOpen(false)}>About</a>
+
+          <div className="mt-4 px-2">
+            <Button className="w-full bg-white/10 hover:bg-white/20 border-white/10" asChild>
+              <a href="mailto:shreyas.makde.dev@gmail.com"><Mail className="mr-2 h-4 w-4" />Get in touch</a>
+            </Button>
+          </div>
+        </nav>
+      </aside>
+    </div>
+  );
+}
+
+/* ——— UI Helpers ——— */
+function Avatar({
+  src,
+  alt,
+  className,
+  initials = "SM",
+}: {
+  src?: string;
+  alt?: string;
+  className?: string;
+  initials?: string;
+}) {
   const [errored, setErrored] = useState(false);
   if (!src || errored) {
     return (
-      <div role="img" aria-label={alt} className={`inline-flex items-center justify-center bg-emerald-500/10 text-emerald-300 ${className}`}>
+      <div
+        role="img"
+        aria-label={alt}
+        className={`inline-flex items-center justify-center bg-emerald-500/10 text-emerald-300 ${className}`}
+      >
         <span className="text-lg font-semibold">{initials}</span>
       </div>
     );

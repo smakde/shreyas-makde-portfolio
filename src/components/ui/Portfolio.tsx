@@ -245,7 +245,7 @@ export default function Portfolio() {
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
                   <span>{p.title}</span>
-                  <Badge className="bg-green-500/20 text-white-200 border-green-400/30">{p.status}</Badge>
+                  {/* <Badge className="bg-green-500/20 text-white-200 border-green-400/30">{p.status}</Badge> */}
                 </CardTitle>
                 <CardDescription className="text-slate-300/80">{p.blurb}</CardDescription>
               </CardHeader>
